@@ -1,0 +1,146 @@
+:root{
+    font-size: 14px;
+}
+body{
+    font-family: 'Poppins', sans-serif;
+    background-color: white;
+    color: #333;
+}
+.w-700{
+    font-weight: 700;
+}
+a{
+    cursor: pointer;
+}
+.btn{
+    // font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    &-lg{
+        font-size: 16px;
+    }
+}
+.cursor{
+    cursor: pointer;
+}
+.text-avatar{
+    width: 36px;
+    height: 36px;
+    line-height: 36px;
+    text-transform: uppercase;
+    font-size: 18px;
+    text-align: center;
+    border-radius: 50%;
+    display: inline-block;
+}
+.nav{
+    margin-top:16px;
+    width:1024px;
+    height:55px;
+   
+}
+
+/* Centers the div that nests the nav_buttons */
+.centerButtons {
+   
+     border-radius: 50em;
+    // margin-left: 390px;
+    // margin-top: 70px;
+    // background-color: #ef6c00;
+    
+    margin: 0 auto;
+    background-color: peru;
+    text-align: center;
+    position: relative;
+    z-index:50;
+    top:40%;
+    left:70%;
+    margin-top:-150px;
+    margin-left:-0.25px;
+    height: 45px;
+    width: 165px;
+    font-size: 15px;
+}
+.button:hover {
+    background-color: #ef6c00;
+    
+  } 
+
+.nav_button{
+    height:50px;
+    margin-right:15px;
+    float: left;
+  
+}
+
+
+.list{
+    margin-top: 100px;
+}
+
+    
+
+.badge {
+    font-weight: 400;
+    font-size: 0.875rem;
+    padding: 5px 10px;
+    border-radius: 2px;
+}
+.table{
+    td, th{
+        vertical-align: middle;
+    }
+}
+
+
+.logo{
+   align-self: left;
+}
+.row{
+    margin-top: 35px;
+}
+.centerDiv{
+    background-color: green;
+}
+
+.main-component {
+    /* The image used */
+    background-image: url(../assets/main.jpg);
+
+    /* Full height */
+    
+
+    /* Center and scale the image nicely */
+   // background-position: center;
+    //background-repeat: no-repeat;
+    background-size: cover;
+    
+}
+.main{
+    
+    background-image: url(../assets/MyPost.png);
+
+    /* Full height */
+    // width: 100%;
+    // height: auto;
+
+    /* Center and scale the image nicely */
+    // background-position: center;
+    // background-repeat: no-repeat;
+     background-size: cover;
+}
+.main-Container{
+    background-color: transparent;
+    margin-top: 300px;
+    margin-right: 1500px;
+   
+    
+}
+
+
+.footer{
+    background-color: black;
+}
+.back{
+    background-color: coral;
+}
