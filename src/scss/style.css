@@ -14282,13 +14282,11 @@ a {
 
 .main-component {
   /* The image used */
-  /* background-image: url(../assets/main.jpg); */
   /* Full height */
   /* Center and scale the image nicely */
   background-size: cover; }
 
 .main {
-  /* background-image: url(../assets/MyPost.png); */
   /* Full height */
   /* Center and scale the image nicely */
   background-size: cover; }
@@ -14303,6 +14301,10 @@ a {
 
 .back {
   background-color: coral; }
+
+.main-card {
+  width: 500px;
+  height: 300px; }
 
 html body .app.flex-row.align-items-center {
   height: 100vh; }

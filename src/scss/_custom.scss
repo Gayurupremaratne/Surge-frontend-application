@@ -105,7 +105,7 @@ a{
 
 .main-component {
     /* The image used */
-    background-image: url(../assets/main.jpg);
+
 
     /* Full height */
     
@@ -118,7 +118,7 @@ a{
 }
 .main{
     
-    background-image: url(../assets/MyPost.png);
+    
 
     /* Full height */
     // width: 100%;
@@ -143,4 +143,8 @@ a{
 }
 .back{
     background-color: coral;
+}
+.main-card{
+    width: 500px;
+    height: 300px;
 }
