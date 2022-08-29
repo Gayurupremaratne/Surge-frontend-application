@@ -22,3 +22,5 @@ Password : $admin
 Student
 Email: user@gmail.com
 Password : 12345678
+ 
+After signing up with you're email, please check your Inbox or Spam to find the mail sent by the system. Follow the link in the mail to proceed.
