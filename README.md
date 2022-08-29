@@ -12,3 +12,13 @@ Installation instructuons
 4. Type command "npm start" to run the application.
 
 The application will run and open up in your browser.
+
+Login credentials 
+
+Admin
+Email: admin@gmail.com
+Password : $admin
+
+Student
+Email: user@gmail.com
+Password : 12345678
