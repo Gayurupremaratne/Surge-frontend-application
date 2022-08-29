@@ -14306,5 +14306,15 @@ a {
   width: 500px;
   height: 300px; }
 
+.note-card {
+  width: 500px;
+  height: 500px; }
+
+.logoutbtn {
+  margin-right: 10px; }
+
+.tfooter {
+  float: right; }
+
 html body .app.flex-row.align-items-center {
   height: 100vh; }

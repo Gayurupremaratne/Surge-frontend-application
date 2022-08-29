@@ -12,9 +12,9 @@ export const REGISTER_STUDENTS = "REGISTER_STUDENTS";
 
 
 
-let user = JSON.parse(localStorage.getItem('user'));
+let token = localStorage.getItem('access_token');
 axios.defaults.baseURL = BASE_URL;
-axios.defaults.headers.common['Authorization'] = user ? user.token : '';
+axios.defaults.headers.common['Authorization'] = token
 axios.defaults.headers.common['Content-Type'] = "application/json";
 
 
@@ -22,10 +22,7 @@ axios.defaults.headers.common['Content-Type'] = "application/json";
 export const SendMail = (props) => {
     
     return (dispatch, getState) => {
-    //   const obj = {
-    //     email: props.email,
-       
-    //   }
+
   
       const url = `/user/sendmail`;
   
@@ -33,7 +30,8 @@ export const SendMail = (props) => {
         props
       ).then(function (response) {
         if (response.data.status) {
-            console.log(response.data)
+          localStorage.setItem("temporary_token", response.data.data)
+            dispatch(closeDialog("SIGNUP"))
           toastr.success('Success', 'Email sent. Please check your mail to proceed');
         } else {
           console.log("err:", response.code);
@@ -50,25 +48,35 @@ export const login = (props) => {
   const url = `/user/login`;
 
   return (dispatch, getState) => {
-    //console.log("data", props)
-    axios.post(`${url}`,props
-    //   {
-    //     username: props.email,
-    //     password: props.password
-    //   }
+    
+   const data= {
+      email: props.email,
+      password: props.password
+    }
+    
+    axios.post(`${url}`,
+      data
     ).then(function (response) {
+      console.log("response", response)
+     
       if (response.data.status) {
+        dispatch({
+          type: USER_LOGGED_IN,
+          payload: "logged_in",
+        });
         localStorage.setItem("access_token", response.data.data)
         //console.log("userthis", response.data)
         var decoded = jwt_decode(response.data.data);
-        console.log("decoded", decoded)
-        if (decoded.type == "student" ) {
-          if(decoded.status === 1){
+        console.log("decoded type", decoded)
+        if (decoded.type === "student" && decoded.status === true) {
+          
             window.location.href = "/sign-up";
-          }else{
-            
-          }
-        } else if(decoded.type == "admin"){
+          
+        } else if(decoded.type === "student" && decoded.status === false){
+            window.location.href = "/notes";
+        }
+        
+        else if(decoded.type === "admin"){
           window.location.href = "/users";
         }
         // localStorage.setItem('user', JSON.stringify({
@@ -82,15 +90,12 @@ export const login = (props) => {
         // localStorage.setItem('type', 'owner')
         
 
-        dispatch({
-          type: USER_LOGGED_IN,
-          payload: "logged_in",
-        });
         
       } else {
         toastr.error('failed', 'Please enter valid email or password');
       }
 
+      
 
     }).catch(function (error) {
       dispatch({
@@ -106,68 +111,30 @@ export const login = (props) => {
 
   }
 }
+export const logout = props => {
+  return (dispatch, getState) => {
+    dispatch({
+      type: USER_LOGGED_OUT,
+      payload: null
+    });
+    window.location.href = "/main";
+  };
+};
 
-// export const Registerstudent = (props) => {
-//   console.log('register', props)
-//   return (dispatch, getState) => {
-//     const obj = {
-//       username: props.username,
-//       password: props.password
-//     }
-//     let payment =localStorage.getItem('payment');
-//     let payment_type =localStorage.getItem('payment_type');
-//     let student_id =localStorage.getItem('student_id');
-//     let hostelID =localStorage.getItem('hostelID');
-//     let owner_id =localStorage.getItem('owner_id');
-//     const amount = localStorage.getItem('exact_price');
-//     const obj1={
-//       payment,
-//    payment_type,
-//    student_id,
-//    hostelID,
-//    owner_id,
-//    amount
-//    }
+export const add_User = (props) => {
 
-//     const url = `/student/register`;
+  return (dispatch, getState) => {
 
-//     axios.post(`${url}`,
-//       props
-//     ).then(function (response) {
-//       if (response.data.status) {
-//         toastr.success('Success', 'Successfully booked');
-        
-//         dispatch(booking(obj1))
-//         dispatch(studLogin(obj));
-//       } else {
-//         console.log("err:", response.code);
-//       }
-//     });
+    const url = `/user/register`;
 
-//   }
+    axios.post(`${url}`,
+      props
+    ).then(({ data }) => {
+      console.log("add user", data)
+      toastr.success('Success', 'Thank you for signing up. Login to continue');
+      window.location.href = "/main";
+    });
+  }
 
-// }
-
-// export const add_User = (props) => {
-
-//   return (dispatch, getState) => {
-
-//     const obj = {
-//       username: props.username,
-//       password: props.password
-//     }
-//     const url = `/owner/register`;
-
-//     axios.post(`${url}`,
-//       props
-//     ).then(({ data }) => {
-//       console.log("response", data)
-//       toastr.success('Success', 'Successfully register');
-
-//       dispatch(closeDialog('REGISTERUSER'));
-//       dispatch(login(obj));
-//     });
-//   }
-
-// }
+}
 

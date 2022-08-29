@@ -4,76 +4,72 @@ import { connect } from "react-redux";
 import { compose } from "recompose";
 import { bindActionCreators } from "redux";
 import EditNoteForm from "../forms/EditNoteForm";
-import { getNoteById } from "../../actions/notes";
+import { Card, CardBody } from "reactstrap";
 
 
 class EditNotesModal extends Component {
 
-    constructor(props) {
-        super(props);
-    
-        this.state = {
-          notes:[],
-          
-        };
-    
-    
-      }
-    
-      componentDidMount() {
-        this.props.getNoteById();
-        
-      }
-    UNSAFE_componentWillReceiveProps(nextProps) {
+  constructor(props) {
+    super(props);
 
-        if (this.props.notes !== nextProps.notes) {
-            this.setState({ notes: nextProps.notes })
-        }
-        
-    }
-    render() {
-        const { notes } = this.state;
-        if (notes) {
-            return notes.map(note => {
+    this.state = {
+      notes: [],
 
-                const obj={
-                    id:note._id,
-                    title:note.title,
-                    description:note.description
-                  }
-                  console.lol("mapped",obj)
-                  return (
-            
-        
-                    <EditNoteForm initialValues={obj}/>
-        
-        
-                );
-            });
-        }
-        
-    }
-}
-function mapStateToProps({ processing,notes }) {
-    return {
-      processing,
-      notes
     };
+
+
   }
 
+
+  render() {
+    const { data } = this.props;
+    console.log("modaldata",data)
+    const obj={
+      "id":data.data._id,
+      "userID":data.data.userID,
+      "title":data.data.title,
+      "description":data.data.description,
+      "createdDate":data.data.createdDate
+    }
+
+    return (
+      <div className="modal-signin">
+           <div className="modal-header">
+             <h4 className="modal-title">Edit Note</h4>
+             <button
+               type="button"
+               className="close"
+               onClick={() => this.props.closeDialog("NOTES")}
+             >
+               <span aria-hidden="true">
+                 <i className="fa fa-times"></i>
+               </span>
+             </button>
+           </div>
+          
+           <Card><CardBody><EditNoteForm initialValues={obj} /></CardBody></Card>
+          
+         </div>
+      
+    )
+
+  }
+}
+
 function mapDispatchToProps(dispatch) {
-    return bindActionCreators({ 
-        closeDialog, 
-        openDialog,
-        getNoteById
-     }, dispatch);
+  return bindActionCreators({
+    closeDialog,
+    openDialog,
+    //getNoteById
+  }, dispatch);
 }
 const WithDialog = compose(
-    reduxDialog(connect, {
-        name: "NOTES",
-        centered: true,
-        //className: "modal-right"
-    })
+  reduxDialog(connect, {
+    name: "NOTES",
+    backdrop: "true",
+    centered: true,
+    className: "modal-right modal-lg"
+  })
 )(EditNotesModal);
 const ConnectedWithDialog = connect(null, mapDispatchToProps)(WithDialog);
 

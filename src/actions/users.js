@@ -13,12 +13,12 @@ export const getUsers = (props) => {
     
     return (dispatch, getState) => {
         
-        const url = `/admin/users`;
+        const url = `/admin/users/${props}`;
         axios.get(`${url}`,
         ).then(({ data }) => {
-           console.log("action",data.data)
+   
             
-                dispatch({ type: FETCH_USERS, payload: data.data });
+                dispatch({ type: FETCH_USERS, payload: data });
             
         });
     }

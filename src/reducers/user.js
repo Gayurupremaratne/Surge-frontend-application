@@ -1,4 +1,4 @@
-import { USER_LOGGED_IN, ERROR_MESSAGE} from "../actions/";
+import { USER_LOGGED_IN, USER_LOGGED_OUT, ERROR_MESSAGE} from "../actions/";
 
 export default function(state = null, action) {
  
@@ -7,9 +7,9 @@ export default function(state = null, action) {
       
       //console.log("user",action.payload);
       return action.payload;
-    //   case USER_LOGGED_OUT:
-    //   localStorage.removeItem("token");
-    //   localStorage.removeItem("user");
+      case USER_LOGGED_OUT:
+      localStorage.removeItem("access_token");
+      localStorage.removeItem("temporary_token");
     //   localStorage.removeItem("username");
     //   localStorage.removeItem("type");
     //   //localStorage.removeItem("student_id");

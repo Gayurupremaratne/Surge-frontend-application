@@ -8,6 +8,7 @@ import Users from './views/Users'
 import Notes from './views/Mynotes'
 import SignupWithEmailModal from './modals/SignupWithEmailModal';
 import EditNotesModal from './modals/EditNotesModal';
+import AddNoteModal from './modals/AddNoteModal';
 import ProtectedRoute from './ProtectedRoute';
 class App extends Component {
 
@@ -19,16 +20,16 @@ class App extends Component {
                 <ReduxToastr />
                 <BrowserRouter>
                     <Switch>
+                    <Route exact path="/notes" name="notes" component={Notes} />
+                    <Route exact path="/sign-up" name="signup" component={SignUp} />
+                    <ProtectedRoute path="/users" name="users" component={Users}/>
                     <Route path="/" name="Home" component={Home} />
-                    <Route exact path="/sign-up" name="signup" render={props => <SignUp />} />
-                    <Route exact path="/notes" name="notes" render={props => <Notes/>} />
-                    <Route exact path="/users" name="user" render={props => <Users/>} />
-                    {/* <ProtectedRoute exact path="/users" component={Users}/> */}
                     </Switch>
 
                 </BrowserRouter>
                 <SignupWithEmailModal/>
                 <EditNotesModal/>
+                <AddNoteModal/>
             </div>
 
         );

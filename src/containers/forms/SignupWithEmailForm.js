@@ -54,7 +54,6 @@ class SignupWithEmailForm extends Component {
 
   render() {
     const { handleSubmit, submitting } = this.props;
-    const { SendMail } = this.props;
 
     return (
       <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>

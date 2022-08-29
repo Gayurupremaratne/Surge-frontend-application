@@ -2,6 +2,7 @@ import React, {Component} from "react";
 import {Redirect, Route, Switch} from "react-router-dom";
 import {connect} from "react-redux";
 import {bindActionCreators} from "redux";
+import Header from "./Header";
 import {
     AppHeader
 } from "@coreui/react";
@@ -15,7 +16,7 @@ class Home extends Component {
         return (
             <div className="app">
         <AppHeader fixed>
-         
+         <Header/>
         </AppHeader>
      
         <div className="app-body">

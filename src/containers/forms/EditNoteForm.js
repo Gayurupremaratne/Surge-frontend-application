@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component} from "react";
 
 import {
   Button,
@@ -33,73 +33,75 @@ class EditNoteForm extends Component {
     super(props);
     this.state = {
       submitting: this.props.processing,
-      error_msg: ""
+      error_msg: "",
+      noteID: "",
+      userID: ""
     };
   }
 
   onSubmit(values) {
-    console.log(values)
-     this.props.editNote(values);
+    // const nid = this.state.noteID
+    // const uid = this.state.userID
+    console.log("form",values)
+    const obj = {
+      "id": values.id,
+      "userID": values.userID,
+      "title": values.title,
+      "description": values.description,
+      "createdDate": values.createdDate
+    }
+    this.props.editNote(obj);
   }
 
-  componentWillUpdate(prevProps){
-    // if (prevProps.user !== this.props.user) {
-    //   const path = localStorage.getItem("path");
-    //   console.log("im here")
-    //   window.location.href = {path}
-    // } else {
-      
-    // }
-  }
-  
+
 
   render() {
-    const { handleSubmit, submitting } = this.props;
+    const { handleSubmit, submitting, initialValues } = this.props;
+    
+    // const nID = initialValues.id
+    // const uID = initialValues.userID
  
+   
     return (
+   //{IDStore},
       <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
         <h1>Edit note</h1>
+      
 
         {/* <p className="text-muted">Sign In to your account</p> */}
         <FormText color="danger">{this.state.error_msg}</FormText>
-        <Field
-          
-          icon="fa fa-user"
-          type="hidden"
-          label="id"
-          name="id"
 
-        />
         <Field
           component={renderField}
-          icon="fa fa-user"
+          icon="fa fa-sticky-note"
           type="text"
           label="Title"
           name="title"
+        //defaultValue={initialValues.data.title}
 
         />
         <Field
           component={renderField}
-          icon="fa fa-user"
+          icon="fa fa-sticky-note"
           type="textarea"
           label="Description"
           name="description"
-
+        //defaultValue={initialValues.data.description}
         />
-        
-        
+
+
         <Row>
           <Col xs="6">
             <Button
-              color="primary"
+              color="success"
               disabled={submitting}
               type="submit"
-              //onSubmit={SendMail}
-            ><i class="fas fa-sign-in-alt"></i>  Update
+            //onSubmit={SendMail}
+            ><i class="fa fa-plus-square" aria-hidden="true"></i>  UPDATE
             </Button>
           </Col>
         </Row>
-  
+
       </form>
     );
   }
@@ -114,7 +116,7 @@ const validate = values => {
   }
 
   return errors;
-};   
+};
 
 const renderField = ({
   input,
@@ -147,7 +149,7 @@ function mapStateToProps({ processing, user }) {
 function mapDispatchToProps(dispatch) {
   return bindActionCreators(
     {
-        editNote,
+      editNote,
       openDialog
     },
     dispatch
